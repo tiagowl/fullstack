@@ -18,7 +18,13 @@
                     </li>
                   </ul>
                   <br>
-                  <input type="text" class="form-control" placeholder="Digite o prefixo" >
+                  <div class="input-group">
+                      <input type="text" v-model="prefix" class="form-control" placeholder="Digite o prefixo" >
+                      <div class="input-group-append" >
+                        <button class="btn btn-info" v-on:click="addPrefix(prefix)" ><span class="fa fa-plus" ></span></button>
+                      </div>
+                  </div>
+                  
                 </div>
               </div>
             </div>
@@ -30,10 +36,15 @@
                         <li class="list-group-item" v-for="sufix in sufixes" v-bind:key="sufix">
                           {{ sufix }}
                         </li>
-                        
+ 
                       </ul>
                       <br>
-                      <input type="text" class="form-control" placeholder="Digite o sufixo" >
+                      <div class="input-group">
+                          <input type="text" v-model="sufix" class="form-control" placeholder="Digite o sufixo" >
+                          <div class="input-group-append" >
+                            <button class="btn btn-info" v-on:click="addSufix(sufix)" ><span class="fa fa-plus" ></span></button>
+                          </div>
+                      </div>
                 </div>
               </div>
             </div>
@@ -64,10 +75,32 @@ export default {
   name: 'app',
   data: function(){
     return{
+      prefix: "",
+      sufix: "",
       prefixes: ["Air", "Jet", "Flight"],
       sufixes: ["Hub", "Station", "Mart"],
       domains: ["AirHub", "AirStation", "AirMart", "JetHub", "JetStation", "JetMart", "FlightHub", "FlightStation", "FlightMart"]
-    };
+    }
+  },
+  methods: {
+    addPrefix(prefix){
+      this.prefixes.push(prefix);
+      this.prefix = "";
+      this.generate();
+    },
+    addSufix(sufix){
+      this.sufixes.push(sufix);
+      this.sufix = "";
+      this.generate();
+    },
+    generate(){
+      this.domains = [];
+      for(const prefix of this.prefixes){
+        for(const sufix of this.sufixes){
+          this.domains.push(prefix + sufix);
+        }
+      }
+    }
   }
 }
 </script>
