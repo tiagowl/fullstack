@@ -31,11 +31,7 @@
       "plugin:vue/essential",
       "eslint:recommended"
     ],
-    "rules": {
-      "quotes": ["error", "double"],
-      "indent": ["error", "tab"],
-      "semi": ["error", "always"]
-    },
+    "rules": {},
     "parserOptions": {
       "parser": "babel-eslint"
     }
